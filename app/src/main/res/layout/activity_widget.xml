@@ -7,17 +7,33 @@
 
     <com.pmcc.customview.widget.RatioImage
         android:id="@+id/widget_rt"
-        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimaryDark"
         android:scaleType="fitXY"
         android:src="@drawable/a12"
+        android:visibility="gone"
         myAttr:ratioSize="0.3" />
+
     <com.pmcc.customview.widget.MoneyEditText
         android:id="@+id/widget_mev"
-        android:theme="@style/MyEditText"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:theme="@style/MyEditText"
+        android:visibility="gone" />
+
+    <com.pmcc.customview.widget.DeleteEditText
+        android:id="@+id/widget_dlt_et"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        myAttr:delet_img="@mipmap/clear_content" />
+
+    <TextView
+        android:id="@+id/widget_htmlsp_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
+
 
 </LinearLayout>

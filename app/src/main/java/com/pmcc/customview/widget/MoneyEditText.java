@@ -38,7 +38,6 @@ public class MoneyEditText extends android.support.v7.widget.AppCompatEditText {
     private void initLister() {
         //只可以输入小数跟"."
         setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL | InputType.TYPE_CLASS_NUMBER);
-        addTextChangedListener(new MyTextWatcher(this));
 
     }
 
@@ -51,51 +50,27 @@ public class MoneyEditText extends android.support.v7.widget.AppCompatEditText {
         }
     }
 
-    static class MyTextWatcher implements TextWatcher {
-
-        private final WeakReference<EditText> reference;
-
-        public MyTextWatcher(EditText editText) {
-            reference = new WeakReference<>(editText);
+    @Override
+    protected void onTextChanged(CharSequence s, int start, int lengthBefore, int lengthAfter) {
+        if (TextUtils.isEmpty(s)) {
+            return;
         }
-
-        @Override
-        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
+        //第一个字符为小数点
+        if (s.toString().equals(".")) {
+            setText("0.");
+            setSelection(getText().toString().length());
         }
-
-        @Override
-        public void onTextChanged(CharSequence s, int i, int i1, int i2) {
-            EditText editText = reference.get();
-            if (editText != null) {
-                if (TextUtils.isEmpty(s)) {
-                    return;
-                }
-                //第一个字符为小数点
-                if (s.toString().equals(".")) {
-                    editText.setText("0.");
-                    editText.setSelection(editText.getText().toString().length());
-                }
-                //去除01、00等首数字为0
-                if (s.length() > 1 && "0".equals("" + s.charAt(0)) && !".".equals("" + s.charAt(1))) {
-                    editText.setText(s.subSequence(1, s.length()));
-                }
-                //只能输入两位小数
-                if (s.toString().contains(".")) {
-                    int lastPosition = s.toString().lastIndexOf(".");
-                    if (s.toString().substring(lastPosition, s.toString().length()).length() > 3) {
-                        editText.setText(s.subSequence(0, lastPosition + 3));
-                        editText.setSelection(editText.getText().toString().length());
-                    }
-
-                }
-
+        //去除01、00等首数字为0
+        if (s.length() > 1 && "0".equals("" + s.charAt(0)) && !".".equals("" + s.charAt(1))) {
+            setText(s.subSequence(1, s.length()));
+        }
+        //只能输入两位小数
+        if (s.toString().contains(".")) {
+            int lastPosition = s.toString().lastIndexOf(".");
+            if (s.toString().substring(lastPosition, s.toString().length()).length() > 3) {
+                setText(s.subSequence(0, lastPosition + 3));
+                setSelection(getText().toString().length());
             }
-        }
-
-        @Override
-        public void afterTextChanged(Editable editable) {
-
         }
     }
 

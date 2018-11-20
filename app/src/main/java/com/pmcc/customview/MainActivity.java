@@ -18,7 +18,7 @@ import com.pmcc.customview.widget.WidgetActivity;
 public class MainActivity extends AppCompatActivity {
 
     private ListView mainlv;
-    private String[] itemNames = {"自定义宽高比view","自定义金钱输入view"};
+    private String[] itemNames = {"自定义宽高比view","输入金钱editext","带删除的editext","添加html样式"};
     private Intent intent;
 
     @Override

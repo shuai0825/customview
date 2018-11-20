@@ -3,4 +3,7 @@
     <declare-styleable name="RatioImage">
         <attr name="ratioSize" format="float"/>
     </declare-styleable>
+    <declare-styleable name="DeleteEditText">
+        <attr name="delet_img" format="reference"/>
+    </declare-styleable>
 </resources>
